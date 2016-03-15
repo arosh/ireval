@@ -11,5 +11,5 @@ setup(
     license='BSD 3-Clause',
     packages=find_packages(exclude=['tests']),
     tests_require=['nose'],
-    test_suite = 'nose.collector'
+    test_suite='nose.collector'
 )

@@ -15,18 +15,20 @@ def _group_by_query(ws):
 
 
 def _ndcg_one_query(gs, rs, k):
-    gs_sorted = sorted([w.weight for w in gs], reverse=True)
-    denom = sum(x / math.log(r + 1)
-                for x, r in zip(gs_sorted, range(1, k + 1)))
+    assert len(gs) == len(rs)
 
     weight_dict = {}
     for w in gs:
         weight_dict[w.item] = w.weight
+    rs = [weight_dict[w.item]
+          for w in sorted(rs, key=lambda w: w.weight, reverse=True)]
+    gs = [weight_dict[w.item]
+          for w in sorted(gs, key=lambda w: w.weight, reverse=True)]
 
-    rs_sorted = [weight_dict[w.item]
-                 for w in sorted(rs, key=lambda w: w.weight, reverse=True)]
     numer = sum(x / math.log(r + 1)
-                for x, r in zip(rs_sorted, range(1, k + 1)))
+                for x, r in zip(rs, range(1, k + 1)))
+    denom = sum(x / math.log(r + 1)
+                for x, r in zip(gs, range(1, k + 1)))
 
     return numer / denom
 
@@ -44,5 +46,49 @@ def ndcg(gs, rs, k):
     scores = {}
     for query in queries:
         scores[query] = _ndcg_one_query(gs_query[query], rs_query[query], k)
+
+    return scores
+
+
+def _q_measure_one_query(gs, rs, beta):
+    assert len(gs) == len(rs)
+
+    weight_dict = {}
+    for w in gs:
+        weight_dict[w.item] = w.weight
+    rs = [weight_dict[w.item]
+          for w in sorted(rs, key=lambda w: w.weight, reverse=True)]
+    gs = [weight_dict[w.item]
+          for w in sorted(gs, key=lambda w: w.weight, reverse=True)]
+
+    IsRel = lambda x: 1 if x > 0 else 0
+    sigma = []
+    M = len(gs)
+    for r in range(M):
+        numer = []
+        denom = []
+        for r2 in range(r + 1):
+            numer.append(beta * rs[r2] + IsRel(rs[r2]))
+            denom.append(beta * gs[r2] + 1.0)
+        sigma.append(IsRel(rs[r]) * sum(numer) / sum(denom))
+
+    R = sum(IsRel(x) for x in rs)
+    return sum(sigma) / R
+
+
+def q_measure(gs, rs, beta=1.0):
+    assert ireval.validate(gs, rs)
+    # {query -> Weight}
+    gs_query = _group_by_query(gs)
+    rs_query = _group_by_query(rs)
+
+    assert gs_query.keys() == rs_query.keys()
+    queries = gs_query.keys()
+
+    # {query -> Q-measure}
+    scores = {}
+    for query in queries:
+        scores[query] = _q_measure_one_query(
+            gs_query[query], rs_query[query], beta)
 
     return scores
