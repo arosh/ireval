@@ -2,6 +2,11 @@
 
 Collection of Evaluation Metrics for Information Retrieval
 
+## List of Metrics
+
+* nDCG [Järvelin, 2002]
+* Q-measure [Sakai, 2007]
+
 ## How to Test
 
 ```
