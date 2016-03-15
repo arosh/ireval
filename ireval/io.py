@@ -25,6 +25,7 @@ def read_tsv(fname, encoding='UTF-8', delimiter='\t', skip=0):
                 ws.append(ireval.Weight(query, item, weight))
     return ws
 
+
 def _check_duplicate(weights):
     used = set()
     for w in weights:
@@ -32,6 +33,7 @@ def _check_duplicate(weights):
             return False
         used.add((w.query, w.item))
     return True
+
 
 def _check_missing(a, b):
     used = set()
@@ -43,6 +45,7 @@ def _check_missing(a, b):
             return False
 
     return True
+
 
 def validate(gs, rs):
     if not _check_duplicate(gs):

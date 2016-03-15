@@ -8,6 +8,7 @@ from nose.tools import eq_, ok_
 
 import ireval
 
+
 def test_read_weights():
     fname = os.path.join('tests', 'weights.tsv')
     gs = ireval.io.read_tsv(fname)
@@ -21,6 +22,7 @@ def test_read_weights():
         eq_(weights[i], w.weight)
     return gs
 
+
 def test_read_runs():
     fname = os.path.join('tests', 'run.tsv')
     rs = ireval.io.read_tsv(fname, skip=1)
@@ -33,6 +35,7 @@ def test_read_runs():
         eq_(items[i], r.item)
         eq_(weights[i], r.weight)
     return rs
+
 
 def test_validate_missing():
     queries = ['q1', 'q1', 'q1']
@@ -51,6 +54,7 @@ def test_validate_missing():
 
     ok_(not ireval.io.validate(gs, rs))
 
+
 def test_validate_duplicate():
     queries = ['q1', 'q1', 'q1']
     items = ['i1', 'i2', 'i3']
@@ -67,6 +71,7 @@ def test_validate_duplicate():
         rs.append(ireval.Weight(q, i, w))
 
     ok_(not ireval.io.validate(gs, rs))
+
 
 def test_validate_ok():
     gs = test_read_weights()

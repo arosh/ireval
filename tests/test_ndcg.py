@@ -8,5 +8,6 @@ from nose.tools import eq_, ok_
 
 import ireval.io
 
+
 def test_ndcg():
     pass
