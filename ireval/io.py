@@ -7,10 +7,14 @@ import codecs
 import ireval
 
 
-def read_weights(fname, encoding='UTF-8', delimiter='\t'):
+def read_tsv(fname, encoding='UTF-8', delimiter='\t', skip=0):
     ws = []
     with codecs.open(fname, encoding=encoding) as f:
+        i = 0
         for line in f:
+            i += 1
+            if i <= skip:
+                continue
             line = line.rstrip()  # remove line break characters
             if len(line) > 0:
                 sp = line.split(delimiter)
