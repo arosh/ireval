@@ -5,15 +5,15 @@ from __future__ import (absolute_import, division, print_function,
 import os
 
 from nose.tools import assert_almost_equal, eq_, ok_
-from tests import test_io
 
 import ireval
+import tests
 
 
 def test_ndcg_at_5():
     k = 5
-    gs = test_io.test_read_weights()
-    rs = test_io.test_read_runs()
+    gs = tests.test_io.test_read_weights()
+    rs = tests.test_io.test_read_runs()
     ms = ireval.metrics.ndcg(gs, rs, k)
     # nDCG = nDCG/iDCG
     # DCG = 3/log2(1+1) + 1/log2(2+1) + 0/log2(3+1) + 3/log2(4+1) + 1/log2(5+1)
@@ -24,8 +24,8 @@ def test_ndcg_at_5():
 
 def test_ndcg_at_3():
     k = 3
-    gs = test_io.test_read_weights()
-    rs = test_io.test_read_runs()
+    gs = tests.test_io.test_read_weights()
+    rs = tests.test_io.test_read_runs()
     ms = ireval.metrics.ndcg(gs, rs, k)
     # nDCG = nDCG/iDCG
     # DCG = 3/log2(1+1) + 1/log2(2+1) + 0/log2(3+1)
