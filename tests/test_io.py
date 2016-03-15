@@ -6,21 +6,20 @@ import os
 
 from nose.tools import eq_, ok_
 
-import ireval.io
-
+import ireval
 
 def test_read_weights():
     fname = os.path.join('tests', 'weights.tsv')
-    ws = ireval.io.read_tsv(fname)
-    eq_(10, len(ws))
+    gs = ireval.io.read_tsv(fname)
+    eq_(10, len(gs))
     queries = ['q1', 'q1', 'q1', 'q1', 'q1', 'q2', 'q2', 'q2', 'q2', 'q2']
     items = ['i1', 'i2', 'i3', 'i4', 'i5', 'i1', 'i2', 'i3', 'i4', 'i5']
     weights = [3, 1, 0, 3, 1, 2, 1, 3, 0, 1]
-    for i, w in enumerate(ws):
+    for i, w in enumerate(gs):
         eq_(queries[i], w.query)
         eq_(items[i], w.item)
         eq_(weights[i], w.weight)
-    return ws
+    return gs
 
 def test_read_runs():
     fname = os.path.join('tests', 'run.tsv')
@@ -34,3 +33,42 @@ def test_read_runs():
         eq_(items[i], r.item)
         eq_(weights[i], r.weight)
     return rs
+
+def test_validate_missing():
+    queries = ['q1', 'q1', 'q1']
+    items = ['i1', 'i2', 'i3']
+    weights = [3, 2, 1]
+    gs = []
+    for q, i, w in zip(queries, items, weights):
+        gs.append(ireval.Weight(q, i, w))
+
+    queries = ['q1', 'q1']
+    items = ['i1', 'i2']
+    weights = [3, 2]
+    rs = []
+    for q, i, w in zip(queries, items, weights):
+        rs.append(ireval.Weight(q, i, w))
+
+    ok_(not ireval.io.validate(gs, rs))
+
+def test_validate_duplicate():
+    queries = ['q1', 'q1', 'q1']
+    items = ['i1', 'i2', 'i3']
+    weights = [3, 2, 1]
+    gs = []
+    for q, i, w in zip(queries, items, weights):
+        gs.append(ireval.Weight(q, i, w))
+
+    queries = ['q1', 'q1', 'q1', 'q1']
+    items = ['i1', 'i2', 'i3', 'i3']
+    weights = [3, 2, 1, 0]
+    rs = []
+    for q, i, w in zip(queries, items, weights):
+        rs.append(ireval.Weight(q, i, w))
+
+    ok_(not ireval.io.validate(gs, rs))
+
+def test_validate_ok():
+    gs = test_read_weights()
+    rs = test_read_runs()
+    ok_(ireval.io.validate(gs, rs))
