@@ -7,6 +7,7 @@ import ireval.metrics
 
 Weight = namedtuple('Weight', ['query', 'item', 'weight'])
 
+
 def _check_duplicate(weights):
     used = set()
     for w in weights:
@@ -26,6 +27,7 @@ def _check_missing(a, b):
             return False
 
     return True
+
 
 def validate(gs, rs):
     if not _check_duplicate(gs):
