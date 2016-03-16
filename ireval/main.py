@@ -28,14 +28,23 @@ def _run(argv):
     gs = ireval.io.read_tsv(args.gsfile, skip=0)
     rs = ireval.io.read_tsv(args.rsfile, skip=args.skip)
 
+    ndcg_at3 = ireval.metrics.ndcg(gs, rs, 3)
+    ndcg_at5 = ireval.metrics.ndcg(gs, rs, 5)
+    ndcg_at10 = ireval.metrics.ndcg(gs, rs, 10)
+    ndcg_at20 = ireval.metrics.ndcg(gs, rs, 20)
+    q_measure = ireval.metrics.q_measure(gs, rs)
+
     if args.verbose:
-        pass
+        queries = sorted(ireval.queries(gs))
+        print('query\tnDCG@3\tnDCG@5\tnDCG@10\tnDCG@20\tQ-measure')
+        for q in queries:
+            print('{}\t{:.4f}\t{:.4f}\t{:.4f}\t{:.4f}\t{:.4f}'.format(q, ndcg_at3[q], ndcg_at5[q], ndcg_at10[q], ndcg_at20[q], q_measure[q]))
     else:
-        _print_mean('nDCG@3', ireval.metrics.ndcg(gs, rs, 3).values())
-        _print_mean('nDCG@5', ireval.metrics.ndcg(gs, rs, 5).values())
-        _print_mean('nDCG@10', ireval.metrics.ndcg(gs, rs, 10).values())
-        _print_mean('nDCG@20', ireval.metrics.ndcg(gs, rs, 20).values())
-        _print_mean('Q-measure', ireval.metrics.q_measure(gs, rs).values())
+        _print_mean('nDCG@3', ndcg_at3.values())
+        _print_mean('nDCG@5', ndcg_at5.values())
+        _print_mean('nDCG@10', ndcg_at10.values())
+        _print_mean('nDCG@20', ndcg_at20.values())
+        _print_mean('Q-measure', q_measure.values())
 
 
 def main():
