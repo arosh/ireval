@@ -38,7 +38,14 @@ def _run(argv):
         queries = sorted(ireval.queries(gs))
         print('query\tnDCG@3\tnDCG@5\tnDCG@10\tnDCG@20\tQ-measure')
         for q in queries:
-            print('{}\t{:.4f}\t{:.4f}\t{:.4f}\t{:.4f}\t{:.4f}'.format(q, ndcg_at3[q], ndcg_at5[q], ndcg_at10[q], ndcg_at20[q], q_measure[q]))
+            ts = []
+            ts.append(q)
+            ts.append('{:.4f}'.format(ndcg_at3[q]))
+            ts.append('{:.4f}'.format(ndcg_at5[q]))
+            ts.append('{:.4f}'.format(ndcg_at10[q]))
+            ts.append('{:.4f}'.format(ndcg_at20[q]))
+            ts.append('{:.4f}'.format(q_measure[q]))
+            print('\t'.join(ts))
     else:
         _print_mean('nDCG@3', ndcg_at3.values())
         _print_mean('nDCG@5', ndcg_at5.values())
