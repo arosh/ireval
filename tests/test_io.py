@@ -9,7 +9,7 @@ import ireval
 
 
 def test_read_weights():
-    fname = os.path.join('tests', 'weights.tsv')
+    fname = os.path.join('examples', 'weights.tsv')
     gs = ireval.io.read_tsv(fname)
     eq_(10, len(gs))
     queries = ['q1', 'q1', 'q1', 'q1', 'q1', 'q2', 'q2', 'q2', 'q2', 'q2']
@@ -23,7 +23,7 @@ def test_read_weights():
 
 
 def test_read_runs():
-    fname = os.path.join('tests', 'run.tsv')
+    fname = os.path.join('examples', 'run.tsv')
     rs = ireval.io.read_tsv(fname, skip=1)
     eq_(10, len(rs))
     queries = ['q1', 'q1', 'q1', 'q1', 'q1', 'q2', 'q2', 'q2', 'q2', 'q2']

@@ -10,11 +10,11 @@ import ireval
 
 def _parse_args(argv):
     parser = argparse.ArgumentParser()
-    parser.add_argument('-g', '--goldstandard', dest='gsfile', required=True)
-    parser.add_argument('-r', '--rankedlist', dest='rsfile', required=True)
+    parser.add_argument('-g', '--goldstandard', metavar='GOLD_STANDARD', dest='gsfile', required=True)
+    parser.add_argument('-r', '--rankedlist', metavar='RANKED_LIST', dest='rsfile', required=True)
     parser.add_argument('-v', '--verbose', action='store_true')
     parser.add_argument('--skip', default=1, metavar='N',
-                        type=int, help='Skip first N lines in ranked list (-r/--rankedlist) (default=1)')
+                        type=int, help='Skip first N lines in ranked list RANKED_LIST (default=1)')
     return parser.parse_args(argv)
 
 
