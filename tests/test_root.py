@@ -6,6 +6,7 @@ from nose.tools import eq_, ok_
 import ireval
 import tests
 
+
 def test_validate_missing():
     queries = ['q1', 'q1', 'q1']
     items = ['i1', 'i2', 'i3']

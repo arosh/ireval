@@ -10,6 +10,7 @@ setup(
     url='https://github.com/arosh/ireval',
     license='BSD 3-Clause',
     packages=find_packages(exclude=['tests']),
+    install_requires=['numpy'],
     tests_require=['nose'],
     test_suite='nose.collector',
     entry_points='''

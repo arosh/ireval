@@ -1,8 +1,7 @@
 # coding: UTF-8
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import math
-
+import numpy
 import ireval
 
 
@@ -25,9 +24,9 @@ def _ndcg_one_query(gs, rs, k):
     gs = [weight_dict[w.item]
           for w in sorted(gs, key=lambda w: w.weight, reverse=True)]
 
-    numer = sum(x / math.log(r + 1)
+    numer = sum(x / numpy.log(r + 1)
                 for x, r in zip(rs, range(1, k + 1)))
-    denom = sum(x / math.log(r + 1)
+    denom = sum(x / numpy.log(r + 1)
                 for x, r in zip(gs, range(1, k + 1)))
 
     return numer / denom
