@@ -7,6 +7,12 @@ Collection of Evaluation Metrics for Information Retrieval
 * nDCG [Järvelin, 2002]
 * Q-measure [Sakai, 2007]
 
+## How to Install
+
+```
+$ pip install (--user) git+https://github.com/arosh/ireval.git
+```
+
 ## Example
 
 ```
@@ -42,7 +48,9 @@ optional arguments:
 ## How to Test
 
 ```
-nosetest -v
+$ git clone https://github.com/arosh/ireval.git
+$ cd path/to/ireval
+$ python setup.py test
 ```
 
 ## License
