@@ -7,20 +7,6 @@ Collection of Evaluation Metrics for Information Retrieval
 * nDCG [Järvelin, 2002]
 * Q-measure [Sakai, 2007]
 
-## Help
-
-```
-$ ireval -h
-usage: ireval [-h] -g GOLD_STANDARD -r RANKED_LIST [-v] [--skip N]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -g GOLD_STANDARD, --goldstandard GOLD_STANDARD
-  -r RANKED_LIST, --rankedlist RANKED_LIST
-  -v, --verbose         Show metrics in each queries
-  --skip N              Skip first N lines in RANKED_LIST (default=1)
-```
-
 ## Example
 
 ```
@@ -37,6 +23,20 @@ $ ireval -v -g examples/weights.tsv -r examples/run.tsv
 query nDCG@3  nDCG@5  nDCG@10 nDCG@20 Q-measure
 q1  0.6291  0.7230  0.7230  0.7230  0.7641
 q2  0.8675  0.8701  0.8701  0.8701  0.8452
+```
+
+## Help
+
+```
+$ ireval -h
+usage: ireval [-h] -g GOLD_STANDARD -r RANKED_LIST [-v] [--skip N]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -g GOLD_STANDARD, --goldstandard GOLD_STANDARD
+  -r RANKED_LIST, --rankedlist RANKED_LIST
+  -v, --verbose         Show metrics in each queries
+  --skip N              Skip first N lines in RANKED_LIST (default=1)
 ```
 
 ## How to Test
