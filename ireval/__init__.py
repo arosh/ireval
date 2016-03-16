@@ -2,6 +2,7 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 from collections import namedtuple
+
 import ireval.io
 import ireval.metrics
 
@@ -43,3 +44,7 @@ def validate(gs, rs):
         return False
 
     return True
+
+
+def queries(ws):
+    return set(w.query for w in ws)
