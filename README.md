@@ -65,9 +65,9 @@ This software is released under the BSD 3-Clause License.
 
 ## References
 
-* Järvelin, K. and Kekäläinen, J.: Cumulated gain-based evaluation of IR techniques, ACM Transactions on Information Systems, Vol.20, pp.422-446 (2002).
-* Sakai, T.: On the reliability of information retrieval metrics based on graded relevance, Information Processing & Management, Vol.43, pp.531-548 (2007).
+* [Järvelin, K. and Kekäläinen, J.: Cumulated gain-based evaluation of IR techniques, ACM Transactions on Information Systems, Vol.20, pp.422-446 (2002).](http://dx.doi.org/10.1145/582415.582418)
+* [Sakai, T.: On the reliability of information retrieval metrics based on graded relevance, Information Processing & Management, Vol.43, pp.531-548 (2007).](http://dx.doi.org/10.1016/j.ipm.2006.07.020)
 * [Evaluation Measures - NTCIR-12 MobileClick-2](http://www.mobileclick.org/home/task)
 * [NTCIREVAL: NTCIR Project Tools](http://research.nii.ac.jp/ntcir/tools/ntcireval-en.html)
-* 酒井哲也：情報検索テストコレクションと評価指標，情報処理学会研究報告，pp.1-8 (2008).
-* Sakai, T.: Statistical reform in information retrieval?, ACM SIGIR Forum Vol.48, pp.3-12 (2014).
+* [Sakai, T.: Information Retrieval Test Collections and Evaluation Metrics: A Tutorial, IPSJ SIG Technical Reports, pp.1-8 (2008).](http://id.nii.ac.jp/1001/00040050/)
+* [Sakai, T.: Statistical reform in information retrieval?, ACM SIGIR Forum Vol.48, pp.3-12 (2014).](http://dx.doi.org/10.1145/2641383.2641385)
