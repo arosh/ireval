@@ -5,7 +5,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='ireval',
-    version='0.0.0',
+    version='0.0.1',
     description='Collection of Evaluation Metrics for Information Retrieval',
     url='https://github.com/arosh/ireval',
     license='BSD 3-Clause',
